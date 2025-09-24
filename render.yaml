@@ -1,24 +1,12 @@
-services:
-  - type: web
-    name: saini-txt-direct
-    plan: free
-    env: docker
-    dockerfilePath: Dockerfile
-    repo: https://github.com/nikhilsainiop/Saini-txt-direct
-    branch: main
-    autoDeploy: false
-    envVars:
-      - key: BOT_TOKEN
-        sync: false
-      - key: API_ID
-        sync: false
-      - key: API_HASH
-        sync: false
-      - key: OWNER
-        sync: false
-      - key: CREDIT
-        sync: false
-      #- key: WEBHOOK
-        #sync: false
-      - key: PORT
-        value: 8000  # Default port value, update if needed
+import os
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Hello from Saini Bot!"
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))  # Local: 8000, Render: auto
+    app.run(host="0.0.0.0", port=port)
